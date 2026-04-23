@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ProvNetChallenge.Application/ProvNetChallenge.Application.csproj" />
+    <Project Path="src/ProvNetChallenge.Domain/ProvNetChallenge.Domain.csproj" />
+    <Project Path="src/ProvNetChallenge.Infrastructure/ProvNetChallenge.Infrastructure.csproj" />
+    <Project Path="src/ProvNetChallenge.WebApi/ProvNetChallenge.WebApi.csproj" />
+  </Folder>
+</Solution>

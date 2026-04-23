@@ -1,0 +1,76 @@
+# 1. Crear el archivo de Solución (.sln)
+dotnet new sln -n ProvNetChallenge
+
+# 2. Crear las carpetas contenedoras de primer nivel (src, test, Docker)
+mkdir src, test
+
+# 3. Entrar a la carpeta 'src' para crear los proyectos
+cd src
+
+# 4. Crear los proyectos de las capas (Dominio, Aplicación, Infraestructura) como Class Libraries
+dotnet new classlib -n ProvNetChallenge.Domain
+dotnet new classlib -n ProvNetChallenge.Application
+dotnet new classlib -n ProvNetChallenge.Infrastructure
+
+# 5. Crear el proyecto WebAPI
+dotnet new webapi -n ProvNetChallenge.WebApi
+
+# 6. Volver a la carpeta raíz de la solución
+cd ..
+
+# 7. Agregar todos los proyectos al archivo de solución
+dotnet sln add src\ProvNetChallenge.Domain\ProvNetChallenge.Domain.csproj
+dotnet sln add src\ProvNetChallenge.Application\ProvNetChallenge.Application.csproj
+dotnet sln add src\ProvNetChallenge.Infrastructure\ProvNetChallenge.Infrastructure.csproj
+dotnet sln add src\ProvNetChallenge.WebApi\ProvNetChallenge.WebApi.csproj
+
+# 8. ESTABLECER LAS REFERENCIAS ENTRE PROYECTOS (Regla de dependencia de Clean Arch)
+# Application depende de Domain
+dotnet add src\ProvNetChallenge.Application\ProvNetChallenge.Application.csproj reference src\ProvNetChallenge.Domain\ProvNetChallenge.Domain.csproj
+
+# Infrastructure depende de Application 
+dotnet add src\ProvNetChallenge.Infrastructure\ProvNetChallenge.Infrastructure.csproj reference src\ProvNetChallenge.Application\ProvNetChallenge.Application.csproj
+
+# WebApi depende de Application (para usar casos de uso) e Infrastructure (para inyección de dependencias)
+dotnet add src\ProvNetChallenge.WebApi\ProvNetChallenge.WebApi.csproj reference src\ProvNetChallenge.Application\ProvNetChallenge.Application.csproj src\ProvNetChallenge.Infrastructure\ProvNetChallenge.Infrastructure.csproj
+
+# 9. CREAR LAS SUB-CARPETAS INTERNAS DE CADA PROYECTO
+# Subcarpetas de Domain
+mkdir src\ProvNetChallenge.Domain\Entities
+mkdir src\ProvNetChallenge.Domain\Interfaces
+mkdir src\ProvNetChallenge.Domain\Enums
+
+# Subcarpetas de Application
+mkdir src\ProvNetChallenge.Application\DTOs
+mkdir src\ProvNetChallenge.Application\Services
+mkdir src\ProvNetChallenge.Application\Mappings
+mkdir src\ProvNetChallenge.Application\Interfaces
+
+# Subcarpetas de Infrastructure
+mkdir src\ProvNetChallenge.Infrastructure\Data
+mkdir src\ProvNetChallenge.Infrastructure\Repositories
+
+# Subcarpetas de WebAPI
+mkdir src\ProvNetChallenge.WebApi\Controllers
+
+# 10. CREAR ARCHIVOS DE RAÍZ ADICIONALES
+New-Item README.md, .gitignore, .dockerignore, Dockerfile
+
+# 11. Installar dependencias y archivos adicionales
+# WebAPI
+cd src\ProvNetChallenge.WebApi
+dotnet add package Microsoft.OpenApi
+dotnet add package Scalar.AspNetCore
+dotnet add package Microsoft.EntityFrameworkCore.Design
+cd ..
+cd ..
+# Infrastructure
+cd src\ProvNetChallenge.Infrastructure
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Design
+cd Data
+New-Item ApplicationDbContext.cs
+cd ..
+cd ..
+cd ..
