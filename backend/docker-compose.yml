@@ -22,7 +22,6 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      # 1. ACTUALIZAMOS EL NOMBRE DE LA BD AL DEL CHALLENGE
       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ProvNetChallenge_Db;User Id=sa;Password=SuperStrongPassword123!;TrustServerCertificate=True;
     depends_on:
       sqlserver:
