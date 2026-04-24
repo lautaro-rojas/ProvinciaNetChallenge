@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ProvNetChallenge.Application.Interfaces;
+using ProvNetChallenge.Domain.Entities;
 
 namespace ProvNetChallenge.Infrastructure.Services
 {
@@ -16,7 +17,7 @@ namespace ProvNetChallenge.Infrastructure.Services
             _config = config;
         }
 
-        public string GenerateJwtToken(string userId, string email, string userName)
+        public string GenerateJwtToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSecretKey"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -24,9 +25,9 @@ namespace ProvNetChallenge.Infrastructure.Services
             // Define the claims (the assertions or data that travel INSIDE the token)
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.Name, userName),
-                new Claim(JwtRegisteredClaimNames.Email, email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Name, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // Unique identifier (Id) for the token (to prevent replay attacks)
                 //new Claim("Rol", "Administrador") // Add custom claim for role (if needed)
             };

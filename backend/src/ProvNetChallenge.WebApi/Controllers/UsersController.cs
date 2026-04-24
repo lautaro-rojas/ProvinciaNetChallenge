@@ -28,7 +28,7 @@ namespace ProvNetChallenge.WebApi.Controllers
 
             if (usersDto == null || usersDto.Count == 0)
             {
-                return NotFound(new { message = "No se encontraron usuarios." });
+                return NotFound(new { message = "No users found." });
             }
 
             return Ok(usersDto);
@@ -45,7 +45,7 @@ namespace ProvNetChallenge.WebApi.Controllers
             
             if (userDto == null)
             {
-                return NotFound(new { message = $"Usuario con ID {id} no encontrado." });
+                return NotFound(new { message = $"User with ID {id} not found." });
             }
 
             return Ok(userDto);
@@ -110,6 +110,23 @@ namespace ProvNetChallenge.WebApi.Controllers
         public async Task<IActionResult> UserDelete(int id)
         {
             var success = await _userService.DeleteAsync(id);
+
+            if (!success)
+            {
+                return NotFound(new { message = $"User with ID {id} not found." }); //Code 404
+            }
+
+            return NoContent(); // Code 204: The update was successful but there is no content to return
+        }
+
+        // DELETE LÓGICO: api/users/5/logical
+        [HttpDelete("{id:int}/logic")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UserDeleteLogic(int id)
+        {
+            var success = await _userService.DeleteLogicAsync(id);
 
             if (!success)
             {

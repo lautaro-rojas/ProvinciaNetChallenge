@@ -9,30 +9,39 @@ namespace ProvNetChallenge.WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly IJwtService _jwtService;
+        private readonly IUserService _userService;
 
-        public AuthController(IAuthService authService, IJwtService jwtService)
+        public AuthController(IAuthService authService, IUserService userService)
         {
             _authService = authService;
-            _jwtService = jwtService;
+            _userService = userService;
         }
 
         // POST: api/Auth/login
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            UserDto? user = await _authService.LoginAsync(loginDto);
+            var result = await _authService.LoginAsync(dto);
+            
+            if (result == null) 
+                return Unauthorized(new { message = "Incorrect credentials" });
 
-            if (user != null) 
-            {
-                var tokenString = _jwtService.GenerateJwtToken(user.Id.ToString(), user.Email, user.UserName);
+            return Ok(result);
+        }
 
-                return Ok(new { Token = tokenString }); // Code 200: OK
-            }
-
-            return Unauthorized(new { Mensaje = "Incorrect credentials" }); // Code 401: Unauthorized
+        [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<IActionResult> Register([FromBody] UserCreationDto dto)
+        {
+            var newUserId = await _userService.AddAsync(dto);
+            
+            // Retornamos un 201 Created (Buenas prácticas REST)
+            return Created("", new { 
+                message = "User registered successfully", 
+                userId = newUserId 
+            });
         }
     }
 }

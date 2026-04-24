@@ -94,7 +94,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 #region Services
 builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IUserService, ProvNetChallenge.Infrastructure.Services.UserService>();
-builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IAuthService, ProvNetChallenge.Infrastructure.Services.AuthService>();
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.Repositories.IUserRepository, ProvNetChallenge.Infrastructure.Repositories.UserRepository>();
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IAuthService, ProvNetChallenge.Application.Services.AuthService>();
 builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IJwtService, ProvNetChallenge.Infrastructure.Services.JwtService>();
 #endregion
 

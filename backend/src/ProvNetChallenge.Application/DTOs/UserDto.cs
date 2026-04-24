@@ -9,9 +9,9 @@ namespace ProvNetChallenge.Application.DTOs
         public string LastName { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public bool ActiveAccount { get; set; }
+        public bool IsActive { get; set; }
         public DateTime DateActivation { get; set; }
-        public DateTime DateModification { get; set; }
-        public DateTime DateDeactivation { get; set; }   
+        public DateTime? DateModification { get; set; }
+        public DateTime? DateDeactivation { get; set; }   
     }
 }

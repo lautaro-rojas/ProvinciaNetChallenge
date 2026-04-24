@@ -4,7 +4,6 @@ namespace ProvNetChallenge.Application.Interfaces
 {
     public interface IUserService
     {
-        // Obtener todos los usuarios (devuelve DTOs, no Entidades)
         Task<List<UserDto>> GetAllAsync();
 
         // Obtener uno por ID
@@ -20,6 +19,6 @@ namespace ProvNetChallenge.Application.Interfaces
         Task<bool> DeleteAsync(int id);
         
         // Borrado lógico
-        Task<bool> DeleteLogicAsync(int id, UserCreationDto dto);
+        Task<bool> DeleteLogicAsync(int id);
     }
 }
