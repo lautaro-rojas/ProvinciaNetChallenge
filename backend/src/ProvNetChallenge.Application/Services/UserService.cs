@@ -2,8 +2,9 @@ using ProvNetChallenge.Domain.Entities;
 using ProvNetChallenge.Application.Interfaces;
 using ProvNetChallenge.Application.DTOs;
 using ProvNetChallenge.Application.Interfaces.Repositories;
+using ProvNetChallenge.Application.Exceptions;
 
-namespace ProvNetChallenge.Infrastructure.Services
+namespace ProvNetChallenge.Application.Services
 {
     public class UserService : IUserService
     {
@@ -56,12 +57,15 @@ namespace ProvNetChallenge.Infrastructure.Services
 
         public async Task<int> AddAsync(UserCreationDto dto)
         {
-            // REGLA DE NEGOCIO SR: Idealmente acá deberías verificar si el email ya existe
-            // llamando a un _userRepository.GetByEmailAsync(dto.Email). 
-            // Si existe, lanzarías una Custom Exception (ej. BadRequestException).
+            var existingUser = await _userRepository.GetByEmailAsync(dto.Email);
+            if (existingUser != null)
+            {
+                // El email debe ser único, si ya existe lanzamos una Custom Exception (BadRequestException).
+                throw new BadRequestException("The email already exists, must be unique.");
+            }
 
             // Encriptamos la contraseña (Nunca se guarda en texto plano en una BD financiera)
-            // Tip: Para que esto funcione, instalá el paquete NuGet "BCrypt.Net-Next" en la capa Application.
+            // Instalar el paquete NuGet "BCrypt.Net-Next" en la capa Application.
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
             var newUser = new User
@@ -76,7 +80,6 @@ namespace ProvNetChallenge.Infrastructure.Services
             };
 
             await _userRepository.AddAsync(newUser);
-            
             return newUser.Id; 
         }
 
@@ -109,7 +112,7 @@ namespace ProvNetChallenge.Infrastructure.Services
             var user = await _userRepository.GetByIdAsync(id);
             if (user == null) return false;
 
-            // REGLA DE NEGOCIO: Borrado lógico.
+            // Borrado lógico.
             // Cambiamos el estado, pero la data financiera o histórica queda intacta.
             user.IsActive = false;
 

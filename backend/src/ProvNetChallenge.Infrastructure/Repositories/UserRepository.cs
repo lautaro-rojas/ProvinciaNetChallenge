@@ -8,17 +8,17 @@ namespace ProvNetChallenge.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             // Ojo al nivel Senior: Filtramos por IsActive para respetar el borrado lógico.
-            return await _context.USER
+            return await _dbContext.USER
                 .Where(u => u.IsActive)
                 .ToListAsync();
         }
@@ -27,27 +27,27 @@ namespace ProvNetChallenge.Infrastructure.Repositories
         {
             // Usamos FirstOrDefaultAsync en lugar de FindAsync porque necesitamos 
             // agregar la condición del IsActive.
-            return await _context.USER
+            return await _dbContext.USER
                 .FirstOrDefaultAsync(u => u.Id == id && u.IsActive);
         }
         
         public async Task<User?> GetByEmailAsync(string email)
         {
-            return await _context.USER
+            return await _dbContext.USER
                 .FirstOrDefaultAsync(u => u.Email == email && u.IsActive);
         }
 
         public async Task AddAsync(User user)
         {
-            await _context.USER.AddAsync(user);
-            await _context.SaveChangesAsync(); // Impacta en SQL Server
+            await _dbContext.USER.AddAsync(user);
+            await _dbContext.SaveChangesAsync(); // Impacta en SQL Server
         }
 
         public async Task UpdateAsync(User user)
         {
             // EF Core trackea los cambios, Update marca la entidad como modificada
-            _context.USER.Update(user);
-            await _context.SaveChangesAsync();
+            _dbContext.USER.Update(user);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(User user)
@@ -56,8 +56,8 @@ namespace ProvNetChallenge.Infrastructure.Repositories
             // Aunque el challenge use borrado lógico, siempre es buena práctica 
             // dejar el borrado físico disponible en el repositorio por si la base 
             // de datos necesita mantenimiento o limpieza por GDPR.
-            _context.USER.Remove(user);
-            await _context.SaveChangesAsync();
+            _dbContext.USER.Remove(user);
+            await _dbContext.SaveChangesAsync();
         }
 
     }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 using ProvNetChallenge.Infrastructure.Data;
+using ProvNetChallenge.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,9 +94,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #endregion
 
 #region Services
-builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IUserService, ProvNetChallenge.Infrastructure.Services.UserService>();
-builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.Repositories.IUserRepository, ProvNetChallenge.Infrastructure.Repositories.UserRepository>();
+// Application
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IUserService, ProvNetChallenge.Application.Services.UserService>();
 builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IAuthService, ProvNetChallenge.Application.Services.AuthService>();
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IProductService, ProvNetChallenge.Application.Services.ProductService>();
+
+// Infraestructura
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.Repositories.IUserRepository, ProvNetChallenge.Infrastructure.Repositories.UserRepository>();
+builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.Repositories.IProductRepository, ProvNetChallenge.Infrastructure.Repositories.ProductRepository>();
 builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IJwtService, ProvNetChallenge.Infrastructure.Services.JwtService>();
 #endregion
 
@@ -125,6 +131,8 @@ app.UseRouting();
 // Estos dos siempre van juntos en este orden exacto, DESPUÉS del routing
 app.UseAuthentication(); 
 app.UseAuthorization();  
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 

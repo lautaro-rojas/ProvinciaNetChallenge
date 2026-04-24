@@ -5,9 +5,6 @@ namespace ProvNetChallenge.Application.DTOs
     public class UserUpdateDto
     {
         // Este objeto se usa SOLO para recibir datos de "afuera" cuando queremos ACTUALIZAR un usuario.
-
-        [Required(ErrorMessage = "Id is required")]    
-        public int Id { get; set; }
         
         [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; } = string.Empty;

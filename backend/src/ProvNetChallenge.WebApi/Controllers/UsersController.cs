@@ -5,9 +5,9 @@ using ProvNetChallenge.Application.Interfaces;
 
 namespace ProvNetChallenge.WebApi.Controllers
 {   
+    [Authorize] // Protect all endpoints in this controller with JWT authentication
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // Protect all endpoints in this controller with JWT authentication
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -58,40 +58,21 @@ namespace ProvNetChallenge.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<UserDto>> UserCreate([FromBody] UserCreationDto userCreationDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // Si el email está repetido, nuestro Service lanza BadRequestException y lo ataja el Middleware.
 
-            try
-            {
-                int newUserId = await _userService.AddAsync(userCreationDto);
+            int newUserId = await _userService.AddAsync(userCreationDto);
 
-                var userFromDb = await _userService.GetByIdAsync(newUserId);
-
-                return CreatedAtAction(nameof(UserGetByID), new { id = newUserId }, userFromDb); // Code 201: User created
-
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return BadRequest(ModelState);
-            }
+            return CreatedAtAction(nameof(UserGetByID), new { id = newUserId }, new { id = newUserId, message = "User created successfully." }); // Code 201: User created
         }
 
         // PUT: api/users/5
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UserUpdate([FromRoute] int id, [FromBody] UserUpdateDto userUpdateDto)
         {
-            if (id != userUpdateDto.Id)
-            {
-                return BadRequest(new { message = "The ID in the route does not match the ID in the request body." }); //Code 400
-            }
-
             var success = await _userService.UpdateAsync(id, userUpdateDto);
 
             if (!success)
@@ -119,7 +100,7 @@ namespace ProvNetChallenge.WebApi.Controllers
             return NoContent(); // Code 204: The update was successful but there is no content to return
         }
 
-        // DELETE LÓGICO: api/users/5/logical
+        // DELETE LÓGICO: api/users/5/logic
         [HttpDelete("{id:int}/logic")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
