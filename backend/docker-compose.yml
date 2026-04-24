@@ -23,6 +23,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ProvNetChallenge_Db;User Id=sa;Password=SuperStrongPassword123!;TrustServerCertificate=True;
+      - JwtSecretKey=EstaEsUnaClaveSuperSecretaParaProvNetChallenge2026!!!
     depends_on:
       sqlserver:
         condition: service_healthy
