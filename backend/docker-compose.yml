@@ -6,7 +6,7 @@ services:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=SuperStrongPassword123!
     ports:
-      - "1433:1433"
+      - "1434:1433"
     healthcheck:
       test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-U", "sa", "-P", "SuperStrongPassword123!", "-C", "-Q", "SELECT 1"]
       interval: 10s

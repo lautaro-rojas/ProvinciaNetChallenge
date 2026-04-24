@@ -46,7 +46,6 @@ El proyecto está diseñado para ser evaluado sin necesidad de instalar SDKs de 
   
     ```bash
     git clone https://github.com/lautaro-rojas/ProvinciaNetChallenge.git
-    cd ProvinciaNetChallenge
     ```
 
 2. Abrir una terminal en la raíz del proyecto (donde se encuentra el archivo `docker-compose.yml`).
