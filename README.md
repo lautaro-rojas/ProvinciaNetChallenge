@@ -42,7 +42,7 @@ El proyecto está completamente dockerizado. No necesitas instalar el SDK de .NE
 - Github Actions
   - Para mantener actualizada el contenedor en Docker cloud
   - Para actualizar el sistema en el ambiente
-- Unit Test (xUnit)
+- Unit Test (xUnit + Moq)
 - Postman
 - Normalización de ambientes no productivos (Sandbox)
 - JWT

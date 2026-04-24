@@ -1,0 +1,35 @@
+version: '3.8' # Siempre es buena práctica poner la versión
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: provnet_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SuperStrongPassword123!
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-U", "sa", "-P", "SuperStrongPassword123!", "-C", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - sqlserver_data:/var/opt/mssql # <--- 2. PERSISTENCIA DE DATOS
+
+  api:
+    image: lautarorojas/provnetchallenge-api:latest
+    container_name: provnet_api
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      # 1. ACTUALIZAMOS EL NOMBRE DE LA BD AL DEL CHALLENGE
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ProvNetChallenge_Db;User Id=sa;Password=SuperStrongPassword123!;TrustServerCertificate=True;
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+
+# Declaración del volumen externo
+volumes:
+  sqlserver_data:

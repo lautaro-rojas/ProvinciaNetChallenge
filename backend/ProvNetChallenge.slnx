@@ -5,4 +5,7 @@
     <Project Path="src/ProvNetChallenge.Infrastructure/ProvNetChallenge.Infrastructure.csproj" />
     <Project Path="src/ProvNetChallenge.WebApi/ProvNetChallenge.WebApi.csproj" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/ProvNetChallenge.Tests/ProvNetChallenge.Tests.csproj" />
+  </Folder>
 </Solution>
