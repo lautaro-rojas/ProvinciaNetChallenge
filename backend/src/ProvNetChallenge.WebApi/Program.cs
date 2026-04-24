@@ -37,7 +37,7 @@ builder.Services.AddOpenApi(options =>
     {
         // Get the attributes you put on the endpoint (e.g., [Authorize], [AllowAnonymous])
         var metadata = context.Description.ActionDescriptor.EndpointMetadata;
-        
+
         var hasAuthorize = metadata.OfType<Microsoft.AspNetCore.Authorization.IAuthorizeData>().Any();
         var hasAllowAnonymous = metadata.OfType<Microsoft.AspNetCore.Authorization.IAllowAnonymous>().Any();
 
@@ -66,21 +66,21 @@ var secretKey = builder.Configuration["JwtSecretKey"]!;
 if (string.IsNullOrWhiteSpace(secretKey) || secretKey.Length < 32)
 {
     Console.ForegroundColor = ConsoleColor.Red;
-    
+
     Console.WriteLine("\n=======================================================================");
     Console.WriteLine(" FATAL ERROR: The server cannot start.");
     Console.WriteLine(" 'JwtSecretKey' is missing in environment variables or is invalid.");
     Console.WriteLine("=======================================================================\n");
-    
+
     Console.ResetColor();
 
     // Turn off the application forcefully. The '1' tells Docker/Coolify that the app failed and should not be deployed.
-    Environment.Exit(1); 
+    Environment.Exit(1);
 }
 builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
     {
         options.TokenValidationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-        
+
         options.TokenValidationParameters.ValidateIssuer = true;
         options.TokenValidationParameters.ValidateAudience = true;
         options.TokenValidationParameters.ValidateLifetime = true;
@@ -114,14 +114,11 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
+app.MapOpenApi();
+app.MapScalarApiReference();
 
-    app.MapGet("/", () => Results.Redirect("/scalar/v1"))
-       .ExcludeFromDescription();
-}
+app.MapGet("/", () => Results.Redirect("/scalar/v1"))
+   .ExcludeFromDescription();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
@@ -129,8 +126,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 // Estos dos siempre van juntos en este orden exacto, DESPUÉS del routing
-app.UseAuthentication(); 
-app.UseAuthorization();  
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
