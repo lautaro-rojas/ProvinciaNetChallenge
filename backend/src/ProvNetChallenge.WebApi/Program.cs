@@ -5,6 +5,7 @@ using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 using ProvNetChallenge.Infrastructure.Data;
 using ProvNetChallenge.WebApi.Middlewares;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -105,7 +106,20 @@ builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.Repositories.
 builder.Services.AddScoped<ProvNetChallenge.Application.Interfaces.IJwtService, ProvNetChallenge.Infrastructure.Services.JwtService>();
 #endregion
 
+#region Coolify config
+// Le decimos a .NET que confíe en las cabeceras que le envía el proxy de Coolify
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    // Estas líneas son importantes al estar en un entorno Dockerizado/Proxy
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+#endregion
+
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 // Crear la base de datos automáticamente al arrancar
 using (var scope = app.Services.CreateScope())
