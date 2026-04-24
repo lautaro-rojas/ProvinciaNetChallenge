@@ -1,6 +1,3 @@
-@ProvNetChallenge.WebApi_HostAddress = http://localhost:5077
-
-GET {{ProvNetChallenge.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
+@ProvNetChallenge.WebApi_HostAddress = http://localhost:8080
 
 ###
