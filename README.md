@@ -1,5 +1,22 @@
 # 📦 Provincia NET Challenge - API de Gestión de Inventario
 
+- [📦 Provincia NET Challenge - API de Gestión de Inventario](#-provincia-net-challenge---api-de-gestión-de-inventario)
+  - [🚀 Tecnologías y Herramientas](#-tecnologías-y-herramientas)
+  - [🏗️ Arquitectura del Sistema](#️-arquitectura-del-sistema)
+  - [✨ Características Destacadas](#-características-destacadas)
+  - [⚙️ Integración y Despliegue Continuo (CI/CD)](#️-integración-y-despliegue-continuo-cicd)
+  - [🏃‍♂️ Cómo ejecutar el proyecto](#️-cómo-ejecutar-el-proyecto)
+    - [Opción 1: Entorno Vivo en la Nube ☁️](#opción-1-entorno-vivo-en-la-nube-️)
+    - [Opción 2: Ejecución Local Dockerizada](#opción-2-ejecución-local-dockerizada)
+      - [Requisitos previos](#requisitos-previos)
+      - [Pasos](#pasos)
+      - [⚠️ Nota sobre Seguridad y Variables de Entorno](#️-nota-sobre-seguridad-y-variables-de-entorno)
+  - [🔐 Cómo probar los endpoints protegidos](#-cómo-probar-los-endpoints-protegidos)
+    - [📮 Colección de Postman Incluida](#-colección-de-postman-incluida)
+  - [🧪 Detalle de las Pruebas Realizadas](#-detalle-de-las-pruebas-realizadas)
+
+---
+
 Esta solución implementa una API RESTful para la gestión de un inventario, desarrollada como parte del desafío técnico para Provincia NET. El proyecto está enfocado en aplicar buenas prácticas de ingeniería de software, arquitectura escalable y una experiencia de despliegue sin configuraciones (Zero-Config).
 
 ## 🚀 Tecnologías y Herramientas
@@ -87,6 +104,33 @@ El proyecto está diseñado para ser evaluado sin necesidad de instalar SDKs de 
 #### ⚠️ Nota sobre Seguridad y Variables de Entorno
 
 Tengo pleno conocimiento de que, en un entorno de Producción real, estos datos sensibles jamás deben versionarse en el repositorio. En un escenario corporativo estándar, utilizaría archivos .env ignorados en Git o un gestor de secretos (como Azure Key Vault) inyectados durante el pipeline de despliegue.
+
+## 🔐 Cómo probar los endpoints protegidos
+
+La API implementa seguridad mediante JSON Web Tokens (JWT). Para interactuar con los endpoints de `User` y `Product`, es necesario autenticarse siguiendo estos pasos:
+
+1. **Registrar un usuario:** Utiliza el endpoint `POST /Auth/register` para crear unas credenciales válidas.
+   ![Registrar](./images/AuthRegister.png)
+
+2. **Iniciar sesión:** Ejecuta el endpoint `POST /Auth/login` con el usuario recién creado. La respuesta te devolverá un token JWT.
+    ![Iniciar sesion](./images/AuthLogin.png)
+    ![Token](./images/token.png)
+
+3. **Autorizar las peticiones:** Copia el token obtenido y utilízalo en la herramienta de tu preferencia:
+   * **En Scalar** Haz clic en el botón de Autorización (generalmente con el ícono de un candado) y pega el token.
+    ![Token scalar](./images/required.png)
+   * **En Postman** Agrégalo en los Headers de tu petición bajo el formato `Authorization: Bearer <tu_token>`.
+    ![Token postman](./images/postman.png)
+
+### 📮 Colección de Postman Incluida
+
+Para facilitar aún más la prueba de la API, se incluye una colección de Postman preconfigurada con todos los endpoints (Users y Products) y sus respectivos payloads de ejemplo.
+
+**Cómo importarla:**
+
+1. Ve a la carpeta `/postman` en la raíz de este repositorio.
+2. Descarga el archivos `.json` (Colección).
+3. Abre Postman, haz clic en **"Import"** en los 3 puntos de arriba a la izquierda y arrastra el archivo.
 
 ## 🧪 Detalle de las Pruebas Realizadas
 

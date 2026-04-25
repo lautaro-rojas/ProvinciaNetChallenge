@@ -1,0 +1,1019 @@
+{
+  "info": {
+    "_postman_id": "353d15fe-e290-49d4-b15c-4eff54405048",
+    "name": "ProvinciaNetChallenge",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29630246"
+  },
+  "item": [
+    {
+      "name": "Cloud",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "LogIn",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Auth/login",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Auth/register",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "GetUsers",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetUserById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUserLogic",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Users/:id/logic",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id",
+                    "logic"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "GetProducts",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Products",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"sku\": \"\",\r\n  \"price\": 0.01,\r\n  \"stock\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Products",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetProductsById",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Products/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"price\": 0.01,\r\n  \"stock\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Products/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "https://provnetchallenge.72.60.155.43.nip.io/api/Products/:id",
+                  "protocol": "https",
+                  "host": [
+                    "provnetchallenge",
+                    "72",
+                    "60",
+                    "155",
+                    "43",
+                    "nip",
+                    "io"
+                  ],
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Localhost",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "LogIn",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "GetUsers",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetUserById",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Users/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"userName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Users/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUser",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Users/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUserLogic",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Users/:id/logic",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id",
+                    "logic"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Products",
+          "item": [
+            {
+              "name": "GetProducts",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"sku\": \"\",\r\n  \"price\": 0.01,\r\n  \"stock\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Products"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetProductsById",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Products/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"description\": \"\",\r\n  \"price\": 0.01,\r\n  \"stock\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/Products/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteProduct",
+              "request": {
+                "auth": {
+                  "type": "bearer"
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/Products/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "Products",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
