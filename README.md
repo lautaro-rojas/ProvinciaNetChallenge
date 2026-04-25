@@ -128,8 +128,8 @@ Para facilitar aún más la prueba de la API, se incluye una colección de Postm
 
 **Cómo importarla:**
 
-1. Ve a la carpeta `/postman` en la raíz de este repositorio.
-2. Descarga el archivos `.json` (Colección).
+1. Ve a la carpeta [`/postman`](https://github.com/lautaro-rojas/ProvinciaNetChallenge/tree/main/postman) en la raíz de este repositorio.
+2. Descarga el archivos [`.json`](https://github.com/lautaro-rojas/ProvinciaNetChallenge/blob/main/postman/ProvinciaNetChallenge.postman_collection.json) (Colección).
 3. Abre Postman, haz clic en **"Import"** en los 3 puntos de arriba a la izquierda y arrastra el archivo.
 
 ## 🧪 Detalle de las Pruebas Realizadas
