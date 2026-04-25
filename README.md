@@ -32,15 +32,29 @@ El backend está estructurado siguiendo los principios de **Clean Architecture**
 El proyecto cuenta con un flujo de CI/CD automatizado mediante **GitHub Actions**.
 Cada vez que se realiza un *push* a la rama `main`, un workflow compila el código y publica la imagen Docker optimizada directamente en Docker Hub (`lautarorojas/provnetchallenge-api:latest`). El archivo `docker-compose.yml` está configurado para consumir esta imagen productiva.
 
-## 🏃‍♂️ Cómo ejecutar el proyecto (Zero-Friction)
+## 🏃‍♂️ Cómo ejecutar el proyecto
+
+Hice dos caminos para facilitar la revisión técnica de esta API, priorizando la agilidad y la experiencia del recuiter.
+
+### Opción 1: Entorno Vivo en la Nube ☁️
+
+La API se encuentra actualmente desplegada y conectada a una base de datos SQL Server mediante un flujo de CI/CD automatizado (Coolify) en un VPS.
+
+Pueden probar los endpoints directamente desde tu navegador sin instalar nada:
+
+👉 **https://provnetchallenge.72.60.155.43.nip.io**
+
+### Opción 2: Ejecución Local Dockerizada
+
+Si prefieren evaluar la orquestación de contenedores en un entorno local, el proyecto cuenta con un flujo de GitHub Actions que publica automáticamente la imagen en Docker Hub.
 
 El proyecto está diseñado para ser evaluado sin necesidad de instalar SDKs de .NET ni configurar servidores locales.
 
-### Requisitos previos
+#### Requisitos previos
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y en ejecución.
 
-### Pasos
+#### Pasos
 
 1. Clonar el repositorio o descargar solo el archivo [`docker-compose.yml`](https://github.com/lautaro-rojas/ProvinciaNetChallenge/blob/main/backend/docker-compose.yml).
   
@@ -70,7 +84,7 @@ El proyecto está diseñado para ser evaluado sin necesidad de instalar SDKs de 
     docker-compose down
     ```
 
-### ⚠️ Nota sobre Seguridad y Variables de Entorno
+#### ⚠️ Nota sobre Seguridad y Variables de Entorno
 
 Tengo pleno conocimiento de que, en un entorno de Producción real, estos datos sensibles jamás deben versionarse en el repositorio. En un escenario corporativo estándar, utilizaría archivos .env ignorados en Git o un gestor de secretos (como Azure Key Vault) inyectados durante el pipeline de despliegue.
 
